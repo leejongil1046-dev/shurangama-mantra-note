@@ -1,4 +1,4 @@
-import type { Mantra } from "@/types/mantra";
+import type { Mantra, MantraPageItem } from "@/types/mantra";
 
 export const SHURANGAMA_MANTRA_PAGE_1: Mantra = [
   {
@@ -370,17 +370,65 @@ export const SHURANGAMA_MANTRA_PAGE_12: Mantra = [
   { line: "시댬투 반트라파다 스바하", indent: 0 },
 ];
 
-export const SHURANGAMA_MANTRA_PAGES: Mantra[] = [
-  SHURANGAMA_MANTRA_PAGE_1,
-  SHURANGAMA_MANTRA_PAGE_2,
-  SHURANGAMA_MANTRA_PAGE_3,
-  SHURANGAMA_MANTRA_PAGE_4,
-  SHURANGAMA_MANTRA_PAGE_5,
-  SHURANGAMA_MANTRA_PAGE_6,
-  SHURANGAMA_MANTRA_PAGE_7,
-  SHURANGAMA_MANTRA_PAGE_8,
-  SHURANGAMA_MANTRA_PAGE_9,
-  SHURANGAMA_MANTRA_PAGE_10,
-  SHURANGAMA_MANTRA_PAGE_11,
-  SHURANGAMA_MANTRA_PAGE_12,
+export const SHURANGAMA_MANTRA_PAGES: MantraPageItem[] = [
+  {
+    id: "page-1",
+    pageNumber: 1,
+    mantra: SHURANGAMA_MANTRA_PAGE_1,
+  },
+  {
+    id: "page-2",
+    pageNumber: 2,
+    mantra: SHURANGAMA_MANTRA_PAGE_2,
+  },
+  {
+    id: "page-3",
+    pageNumber: 3,
+    mantra: SHURANGAMA_MANTRA_PAGE_3,
+  },
+  {
+    id: "page-4",
+    pageNumber: 4,
+    mantra: SHURANGAMA_MANTRA_PAGE_4,
+  },
+  {
+    id: "page-5",
+    pageNumber: 5,
+    mantra: SHURANGAMA_MANTRA_PAGE_5,
+  },
+  {
+    id: "page-6",
+    pageNumber: 6,
+    mantra: SHURANGAMA_MANTRA_PAGE_6,
+  },
+  {
+    id: "page-7",
+    pageNumber: 7,
+    mantra: SHURANGAMA_MANTRA_PAGE_7,
+  },
+  {
+    id: "page-8",
+    pageNumber: 8,
+    mantra: SHURANGAMA_MANTRA_PAGE_8,
+  },
+  {
+    id: "page-9",
+    pageNumber: 9,
+    mantra: SHURANGAMA_MANTRA_PAGE_9,
+  },
+  {
+    id: "page-10",
+    pageNumber: 10,
+    mantra: SHURANGAMA_MANTRA_PAGE_10,
+  },
+  {
+    id: "page-11",
+    pageNumber: 11,
+    mantra: SHURANGAMA_MANTRA_PAGE_11,
+  },
+  {
+    id: "page-12",
+    pageNumber: 12,
+    mantra: SHURANGAMA_MANTRA_PAGE_12,
+  },
 ];

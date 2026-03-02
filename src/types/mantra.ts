@@ -11,3 +11,10 @@ export type RenderLineInfo = {
   startIndex: number;
   endIndex: number;
 };
+
+export type MantraPageItem = {
+  id: string;
+  pageNumber: number;
+  title?: string;
+  mantra: Mantra;
+};

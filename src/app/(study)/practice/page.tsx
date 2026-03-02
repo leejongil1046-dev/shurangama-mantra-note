@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import MantraTextView from "../component/mantra-text-view";
-import ToggleSwitch from "../component/toggle-switch";
-import { SHURANGAMA_MANTRA_PAGES } from "../data/shurangama-mantra";
+import MantraTextView from "@/component/mantra-text-view";
+import ToggleSwitch from "@/component/toggle-switch";
+import PageNavigation from "@/component/page-navigation";
+import { SHURANGAMA_MANTRA_PAGES } from "@/data/shurangama-mantra";
 import { createBlankIndices } from "@/lib/blanks";
 import { usePagination } from "@/hooks/use-pagination";
 
 type BlankByPage = Record<number, Set<number>>;
 
-export default function Home() {
+export default function PracticePage() {
   const [showBlanks, setShowBlanks] = useState(false);
   const [blankByPage, setBlankByPage] = useState<BlankByPage>({});
 
@@ -21,6 +22,7 @@ export default function Home() {
     isLast,
     goPrev,
     goNext,
+    goTo,
   } = usePagination({
     items: SHURANGAMA_MANTRA_PAGES,
   });
@@ -44,9 +46,38 @@ export default function Home() {
   if (!currentPage) return null;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start">
-      <div className="grid h-screen w-screen grid-cols-[120px_1fr_120px]">
-        <div className="flex items-center justify-center">
+    <div className="grid h-[calc(100vh-56px)] grid-cols-[220px_1fr] gap-6 overflow-hidden">
+      <PageNavigation
+        pages={SHURANGAMA_MANTRA_PAGES}
+        currentIndex={currentIndex}
+        onSelectPage={goTo}
+      />
+
+      <section className="flex h-full min-w-0 flex-col overflow-hidden p-6">
+        <div className="flex items-center justify-between pb-4">
+          <ToggleSwitch
+            label="빈칸"
+            checked={showBlanks}
+            onChange={handleToggleBlanks}
+          />
+
+          <p className="text-sm text-gray-600">
+            {currentPage.pageNumber} / {total}
+          </p>
+        </div>
+
+        <div className="min-h-0 flex-1 overflow-auto rounded border border-gray-200 p-4">
+          {showBlanks ? (
+            <MantraTextView
+              mantra={currentPage.mantra}
+              blankIndices={currentBlankIndices}
+            />
+          ) : (
+            <MantraTextView mantra={currentPage.mantra} />
+          )}
+        </div>
+
+        <div className="flex items-center justify-between pt-4">
           <button
             onClick={goPrev}
             disabled={isFirst}
@@ -54,30 +85,7 @@ export default function Home() {
           >
             이전
           </button>
-        </div>
 
-        <div className="flex w-full flex-col items-center pt-6">
-          <div className="mb-4 flex w-full items-center justify-center">
-            <ToggleSwitch
-              label="빈칸"
-              checked={showBlanks}
-              onChange={handleToggleBlanks}
-            />
-          </div>
-
-          <div className="flex w-full overflow-auto px-4">
-            {showBlanks ? (
-              <MantraTextView
-                mantra={currentPage.mantra}
-                blankIndices={currentBlankIndices}
-              />
-            ) : (
-              <MantraTextView mantra={currentPage.mantra} />
-            )}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center">
           <button
             onClick={goNext}
             disabled={isLast}
@@ -86,7 +94,7 @@ export default function Home() {
             다음
           </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
