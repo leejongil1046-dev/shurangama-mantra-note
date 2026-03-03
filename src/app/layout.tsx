@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
+import MainNav from "@/component/main-nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,28 +37,13 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col min-w-[1000px]">
           <header className="flex h-35 items-center border-b border-gray-200 px-6">
             <div className="mx-auto flex h-full items-center justify-center">
-              <div className="font-mantra text-[40px] font-semibold">
+              <div className="font-mantra text-[40px] font-bold">
                 대불정수능엄신주
               </div>
             </div>
           </header>
 
-          <nav className="flex h-16 w-full items-center border-b border-gray-200">
-            <div className="mx-auto flex h-full w-[800px] items-center justify-between gap-12 text-2xl">
-              <div className="flex h-full cursor-pointer items-center border-b-3 border-transparent text-gray-500 hover:text-gray-900">
-                홈
-              </div>
-              <div className="flex h-full cursor-pointer items-center border-b-3 border-gray-900 font-medium text-gray-900 hover:text-gray-900">
-                연습하기
-              </div>
-              <div className="flex h-full cursor-pointer items-center border-b-3 border-transparent text-gray-500 hover:text-gray-900">
-                암기하기
-              </div>
-              <div className="flex h-full cursor-pointer items-center border-b-3 border-transparent text-gray-500 hover:text-gray-900">
-                설정
-              </div>
-            </div>
-          </nav>
+          <MainNav />
 
           <main className="flex flex-1 flex-col min-w-[1000px]">
             {children}
