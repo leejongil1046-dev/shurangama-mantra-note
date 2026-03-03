@@ -32,7 +32,7 @@ export default function Home() {
       const nextBlankByPage: BlankByPage = {};
 
       SHURANGAMA_MANTRA_PAGES.forEach((page, index) => {
-        nextBlankByPage[index] = createBlankIndices(page.mantra);
+        nextBlankByPage[index] = createBlankIndices(page.mantra, 0.1);
       });
 
       setBlankByPage(nextBlankByPage);
