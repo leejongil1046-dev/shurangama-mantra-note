@@ -9,6 +9,8 @@ import { useSettingStore } from "@/store/setting-store";
 import { useMemorizeStore } from "@/store/memorize-store";
 import Image from "next/image";
 import SettingModal from "@/component/setting-modal";
+import TopSettingButton from "@/component/top-setting-button";
+import PaginationControls from "@/component/pagination-controls";
 
 const difficultyToRatio = {
   easy: 0.1,
@@ -124,69 +126,19 @@ export default function MemorizePage() {
               ))}
           </div>
 
-          <div className="flex w-[150px] items-center justify-between">
-            <button
-              type="button"
-              onClick={goPrev}
-              disabled={isFirst}
-              className="flex h-8 w-8 items-center justify-center rounded border disabled:opacity-40"
-              aria-label="이전 페이지"
-            >
-              <Image
-                src="/icons/left.svg"
-                alt=""
-                width={16}
-                height={16}
-                className="h-4 w-4"
-              />
-            </button>
+          <PaginationControls
+            isFirst={isFirst}
+            isLast={isLast}
+            label={hasHydrated ? `${currentPage.pageNumber} / 12` : ""}
+            onPrev={goPrev}
+            onNext={goNext}
+          />
 
-            <p className="text-md text-gray-600">
-              {hasHydrated ? `${currentPage.pageNumber} / 12` : ""}
-            </p>
-
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={isLast}
-              className="flex h-8 w-8 items-center justify-center rounded border disabled:opacity-40"
-              aria-label="다음 페이지"
-            >
-              <Image
-                src="/icons/right.svg"
-                alt=""
-                width={16}
-                height={16}
-                className="h-4 w-4"
-              />
-            </button>
-          </div>
-
-          <div className="flex w-[200px] items-center justify-end gap-3">
-            <button
-              type="button"
-              onClick={() => setIsSettingOpen(true)}
-              className="flex h-[35px] w-[35px] items-center justify-center rounded cursor-pointer hover:bg-gray-100"
-              aria-label="설정"
-            >
-              <Image
-                src="/icons/setting.svg"
-                alt="설정"
-                width={30}
-                height={30}
-              />
-            </button>
-
-            {isSettingOpen && (
-              <SettingModal
-                open
-                pageStart={pageStart}
-                pageEnd={pageEnd}
-                difficulty={difficulty}
-                onClose={() => setIsSettingOpen(false)}
-              />
-            )}
-          </div>
+          <TopSettingButton
+            pageStart={pageStart}
+            pageEnd={pageEnd}
+            difficulty={difficulty}
+          />
         </div>
 
         <div
