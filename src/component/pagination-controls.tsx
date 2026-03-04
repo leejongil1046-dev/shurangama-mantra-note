@@ -21,7 +21,7 @@ export default function PaginationControls({
         type="button"
         onClick={onPrev}
         disabled={isFirst}
-        className="flex h-8 w-8 items-center justify-center rounded border disabled:opacity-40"
+        className="flex h-8 w-8 items-center justify-center rounded border disabled:opacity-40 cursor-pointer hover:bg-gray-100"
         aria-label="이전 페이지"
       >
         <Image
@@ -39,7 +39,7 @@ export default function PaginationControls({
         type="button"
         onClick={onNext}
         disabled={isLast}
-        className="flex h-8 w-8 items-center justify-center rounded border disabled:opacity-40"
+        className="flex h-8 w-8 items-center justify-center rounded border disabled:opacity-40 cursor-pointer hover:bg-gray-100"
         aria-label="다음 페이지"
       >
         <Image
@@ -53,4 +53,3 @@ export default function PaginationControls({
     </div>
   );
 }
-

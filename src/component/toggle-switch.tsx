@@ -24,11 +24,11 @@ export default function ToggleSwitch({
       aria-pressed={checked}
       className="flex items-center gap-3 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <span className="text-xl text-gray-500 font-medium">{label}</span>
+      <span className="text-xl text-gray-600 font-medium">{label}</span>
 
       <span
-        className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors cursor-pointer ${
-          checked ? "bg-gray-800" : "bg-gray-300"
+        className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors cursor-pointer hover:bg-gray-400 ${
+          checked ? "bg-gray-800 hover:bg-gray-800" : "bg-gray-300"
         }`}
       >
         <span
