@@ -29,12 +29,12 @@ const defaultRange: PageRangeSetting = {
   difficulty: "easy",
 };
 
-function clampPageRange(start: number, end: number): { start: number; end: number } {
+function clampPageRange(
+  start: number,
+  end: number,
+): { start: number; end: number } {
   const normalizedStart = Math.max(1, Math.min(start, TOTAL_PAGES));
-  const normalizedEnd = Math.max(
-    normalizedStart,
-    Math.min(end, TOTAL_PAGES),
-  );
+  const normalizedEnd = Math.max(normalizedStart, Math.min(end, TOTAL_PAGES));
   return { start: normalizedStart, end: normalizedEnd };
 }
 
@@ -72,25 +72,7 @@ export const useSettingStore = create<SettingState>()(
       name: "setting-store",
       storage: createJSONStorage(() => sessionStorage),
       onRehydrateStorage: () => (state) => {
-        if (!state) return;
-        // 이전 단일 설정 구조 → 연습/암기 분리 구조 마이그레이션
-        if (!state.practice && "pageStart" in state) {
-          const old = state as unknown as {
-            pageStart: number;
-            pageEnd: number;
-            difficulty: Difficulty;
-          };
-          state.practice = {
-            pageStart: old.pageStart,
-            pageEnd: old.pageEnd,
-            difficulty: old.difficulty,
-          };
-          state.memorize = { ...state.practice };
-          delete (state as unknown as Record<string, unknown>).pageStart;
-          delete (state as unknown as Record<string, unknown>).pageEnd;
-          delete (state as unknown as Record<string, unknown>).difficulty;
-        }
-        state.setHasHydrated(true);
+        if (state) state.setHasHydrated(true);
       },
     },
   ),
