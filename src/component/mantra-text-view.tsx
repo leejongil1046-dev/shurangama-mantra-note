@@ -45,7 +45,7 @@ export default function MantraTextView({
               value={value}
               maxLength={1}
               onChange={(e) => onChangeAnswer(globalIndex, e.target.value)}
-              className="flex items-center justify-center text-center font-mantra font-semibold"
+              className="flex items-center justify-center text-center font-mantra font-semibold focus:outline-gray-500"
               style={{
                 width: charBoxWidth,
                 height: charBoxHeight,
