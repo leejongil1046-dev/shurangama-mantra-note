@@ -8,7 +8,6 @@ export type GradeResult = {
     { totalChars: number; blanks: number; correct: number; wrong: number }
   >;
   total: { totalChars: number; blanks: number; correct: number; wrong: number };
-  /** pageIndex -> charIndex -> true if user answer matches correct */
   correctByBlank: Record<number, Record<number, boolean>>;
 };
 

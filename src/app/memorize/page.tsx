@@ -43,7 +43,7 @@ export default function MemorizePage() {
     : 0;
 
   const {
-    currentIndex,
+    currentIndex: currentPageIndex,
     currentItem: currentPage,
     isFirst,
     isLast,
@@ -55,13 +55,13 @@ export default function MemorizePage() {
     initialIndex,
   });
 
-  const currentAnswers = answersByPage[currentIndex] ?? {};
+  const currentAnswers = answersByPage[currentPageIndex] ?? {};
 
   const handleChangeAnswer = (index: number, value: string) => {
-    setAnswer(currentIndex, index, value);
+    setAnswer(currentPageIndex, index, value);
   };
 
-  const currentBlankIndicesArray = blankByPage[currentIndex] ?? [];
+  const currentBlankIndicesArray = blankByPage[currentPageIndex] ?? [];
   const currentBlankIndices = new Set<number>(currentBlankIndicesArray);
 
   const handleStartMemorize = () => {
@@ -74,7 +74,7 @@ export default function MemorizePage() {
 
     startSession({
       blankByPage: nextBlankByPage,
-      initialPageIndex: currentIndex,
+      initialPageIndex: currentPageIndex,
     });
   };
 
@@ -99,15 +99,15 @@ export default function MemorizePage() {
     selectedPages,
     gradeResult,
     setGradeResult,
-    currentIndex,
+    currentPageIndex,
     currentPage: currentPage ?? undefined,
   });
 
   useEffect(() => {
     if (isActive) {
-      setLastPageIndex(currentIndex);
+      setLastPageIndex(currentPageIndex);
     }
-  }, [currentIndex, isActive, setLastPageIndex]);
+  }, [currentPageIndex, isActive, setLastPageIndex]);
 
   if (!currentPage) return null;
 

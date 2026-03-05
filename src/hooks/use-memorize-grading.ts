@@ -15,7 +15,7 @@ type UseMemorizeGradingParams = {
   selectedPages: MantraPageItem[];
   gradeResult: GradeResult | null;
   setGradeResult: (result: GradeResult | null) => void;
-  currentIndex: number;
+  currentPageIndex: number;
   currentPage: MantraPageItem | undefined;
 };
 
@@ -25,7 +25,7 @@ export function useMemorizeGrading({
   selectedPages,
   gradeResult,
   setGradeResult,
-  currentIndex,
+  currentPageIndex,
   currentPage,
 }: UseMemorizeGradingParams) {
   const [isGradeConfirmOpen, setIsGradeConfirmOpen] = useState(false);
@@ -66,10 +66,9 @@ export function useMemorizeGrading({
   const gradeDisplay = useMemo(() => {
     if (!gradeResult || !currentPage) return undefined;
     const fullText = getFullText(currentPage.mantra);
-    const byBlank = gradeResult.correctByBlank[currentIndex];
+    const byBlank = gradeResult.correctByBlank[currentPageIndex];
     if (!byBlank) return undefined;
-    const out: Record<number, { correctChar: string; isCorrect: boolean }> =
-      {};
+    const out: Record<number, { correctChar: string; isCorrect: boolean }> = {};
     for (const charIndex of Object.keys(byBlank).map(Number)) {
       out[charIndex] = {
         correctChar: fullText[charIndex] ?? "",
@@ -77,7 +76,7 @@ export function useMemorizeGrading({
       };
     }
     return out;
-  }, [gradeResult, currentPage, currentIndex]);
+  }, [gradeResult, currentPage, currentPageIndex]);
 
   return {
     totalBlanks,
