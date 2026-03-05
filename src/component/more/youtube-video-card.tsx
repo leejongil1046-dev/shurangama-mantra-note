@@ -35,6 +35,7 @@ export default function YoutubeVideoCard({
           className="h-full w-full rounded-md"
           src={`https://www.youtube.com/embed/${videoId}`}
           title={title}
+          loading="lazy"
           frameBorder={0}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
