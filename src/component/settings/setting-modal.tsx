@@ -67,15 +67,6 @@ export default function SettingModal({
           <h1 className="text-3xl font-semibold">
             설정 {mode === "practice" ? "(연습하기)" : "(암기하기)"}
           </h1>
-          {onClose && (
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded px-2 py-1 text-lg text-gray-500 cursor-pointer hover:bg-gray-100"
-            >
-              X
-            </button>
-          )}
         </div>
 
         <div className="space-y-10 p-5">
@@ -91,12 +82,21 @@ export default function SettingModal({
           />
         </div>
 
-        <div className="mt-8 flex justify-end p-4">
+        <div className="mt-8 flex justify-end gap-3 p-4">
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-md border border-gray-300 px-6 py-3 text-sm text-gray-700 cursor-pointer hover:bg-gray-50"
+            >
+              취소
+            </button>
+          )}
           <button
             type="button"
             disabled={!isChanged}
             onClick={handleSave}
-            className={`rounded-md px-6 py-3 text-sm text-white transition-colors ${
+            className={`rounded-md px-6 py-3 text-sm text-white transition-colors cursor-pointer ${
               isChanged
                 ? "cursor-pointer bg-gray-900 hover:bg-gray-800"
                 : "cursor-not-allowed bg-gray-400"
