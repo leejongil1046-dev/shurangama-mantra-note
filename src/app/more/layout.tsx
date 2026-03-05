@@ -8,11 +8,11 @@ export default function MoreLayout({ children }: MoreLayoutProps) {
   return (
     <div className="mx-auto flex min-h-[calc(100vh-254px)] w-[1000px]">
       {/* 좌측 사이드 네비게이션 */}
-      <aside className="flex flex-col items-center justify-start w-[300px] border-r border-gray-200">
+      <aside className="flex flex-col items-center justify-start w-[200px] border-r border-gray-200">
         <nav className="text-xl w-full text-center">
           <Link
             href="/more/video"
-            className="block rounded py-6 text-gray-500 border-b border-gray-200 hover:bg-gray-50"
+            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
           >
             개발자 이야기
           </Link>
@@ -24,31 +24,31 @@ export default function MoreLayout({ children }: MoreLayoutProps) {
           </Link>
           <Link
             href="/more/video"
-            className="block rounded py-6 text-gray-500 border-b border-gray-200 hover:bg-gray-50"
+            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
           >
             회원 정보
           </Link>
           <Link
             href="/more/video"
-            className="block rounded py-6 text-gray-500 border-b border-gray-200 hover:bg-gray-50"
+            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
           >
             기록보기
           </Link>
           <Link
             href="/more/video"
-            className="block rounded py-6 text-gray-500 border-b border-gray-200 hover:bg-gray-50"
+            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-5 hover:text-gray-600"
           >
             개인정보처리방침
           </Link>
           <Link
             href="/more/video"
-            className="block rounded py-6 text-gray-500 border-b border-gray-200 hover:bg-gray-50"
+            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-5 hover:text-gray-600"
           >
             이용약관
           </Link>
           <Link
             href="/more/video"
-            className="block rounded py-6 text-gray-500 border-b border-gray-200 hover:bg-gray-50"
+            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
           >
             후원하기
           </Link>

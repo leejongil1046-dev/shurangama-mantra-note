@@ -19,7 +19,7 @@ export default function YoutubeVideoCard({
 }: YoutubeVideoCardProps) {
   return (
     <article
-      className={`bg-white px-12 py-6 ${isLast ? "" : "border-b border-gray-200"}`}
+      className={`bg-white px-15 py-8 ${isLast ? "" : "border-b border-gray-200"}`}
     >
       <a
         href={href}

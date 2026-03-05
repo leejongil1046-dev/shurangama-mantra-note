@@ -55,10 +55,10 @@ export default function MainNav() {
                 itemRefs.current[index] = el;
               }}
               href={item.href}
-              className={`relative z-10 flex h-full flex-1 items-center justify-center px-3 cursor-pointer transition-colors ${
+              className={`relative z-10 flex h-full flex-1 items-center justify-center px-3 font-medium cursor-pointer transition-colors ${
                 isActive
-                  ? "font-medium text-gray-900 hover:text-gray-900"
-                  : "text-gray-500 hover:text-gray-900"
+                  ? "text-gray-900 hover:text-gray-900"
+                  : "text-gray-400 hover:text-gray-600"
               }`}
             >
               {item.label}

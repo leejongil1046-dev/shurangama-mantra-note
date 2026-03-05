@@ -4,7 +4,7 @@ import YoutubeVideoCard from "@/component/more/youtube-video-card";
 
 export default function MoreVideoPage() {
   return (
-    <div className="mx-auto h-full w-[700px]">
+    <div className="mx-auto h-full w-[800px]">
       <section className="flex h-full w-full min-w-0 flex-col overflow-hidden">
         <YoutubeVideoCard
           title="능엄주 (대불정능엄신주)"
