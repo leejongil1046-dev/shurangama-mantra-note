@@ -15,6 +15,12 @@ type SettingState = {
   hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
 
+  fontSize: number;
+  setFontSize: (value: number) => void;
+  increaseFontSize: () => void;
+  decreaseFontSize: () => void;
+  resetFontSize: () => void;
+
   setPracticePageRange: (start: number, end: number) => void;
   setPracticeDifficulty: (difficulty: Difficulty) => void;
   setMemorizePageRange: (start: number, end: number) => void;
@@ -28,6 +34,11 @@ const defaultRange: PageRangeSetting = {
   pageEnd: TOTAL_PAGES,
   difficulty: "easy",
 };
+
+const DEFAULT_FONT_SIZE = 20;
+const MIN_FONT_SIZE = 18;
+const MAX_FONT_SIZE = 22;
+const FONT_SIZE_STEP = 1;
 
 function clampPageRange(
   start: number,
@@ -45,6 +56,27 @@ export const useSettingStore = create<SettingState>()(
       memorize: { ...defaultRange },
       hasHydrated: false,
       setHasHydrated: (value) => set({ hasHydrated: value }),
+
+      fontSize: DEFAULT_FONT_SIZE,
+      setFontSize: (value) =>
+        set({
+          fontSize: Math.max(MIN_FONT_SIZE, Math.min(value, MAX_FONT_SIZE)),
+        }),
+      increaseFontSize: () =>
+        set((state) => ({
+          fontSize: Math.min(
+            state.fontSize + FONT_SIZE_STEP,
+            MAX_FONT_SIZE,
+          ),
+        })),
+      decreaseFontSize: () =>
+        set((state) => ({
+          fontSize: Math.max(
+            state.fontSize - FONT_SIZE_STEP,
+            MIN_FONT_SIZE,
+          ),
+        })),
+      resetFontSize: () => set({ fontSize: DEFAULT_FONT_SIZE }),
 
       setPracticePageRange: (start, end) => {
         const { start: s, end: e } = clampPageRange(start, end);

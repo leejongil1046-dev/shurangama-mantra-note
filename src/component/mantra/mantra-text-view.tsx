@@ -13,11 +13,22 @@ export type MantraTextViewProps = {
   answers?: Record<number, string>;
   onChangeAnswer?: (index: number, value: string) => void;
   gradeDisplay?: Record<number, GradeDisplayEntry>;
-  charBoxWidth?: number;
-  charBoxHeight?: number;
   fontSize?: number;
-  marginBottom?: number;
 };
+
+const DEFAULT_FONT_SIZE = 20;
+
+export function getMantraLayoutByFontSize(fontSize: number = DEFAULT_FONT_SIZE) {
+  const baseFontSize = DEFAULT_FONT_SIZE;
+  const ratio = fontSize / baseFontSize;
+
+  return {
+    fontSize,
+    charBoxWidth: 24 * ratio,
+    charBoxHeight: 26 * ratio,
+    marginBottom: 10 * ratio,
+  };
+}
 
 export default function MantraTextView({
   mantra,
@@ -26,11 +37,10 @@ export default function MantraTextView({
   answers,
   onChangeAnswer,
   gradeDisplay,
-  charBoxWidth = 24,
-  charBoxHeight = 26,
-  fontSize = 20,
-  marginBottom = 10,
+  fontSize = DEFAULT_FONT_SIZE,
 }: MantraTextViewProps) {
+  const { charBoxWidth, charBoxHeight, marginBottom } =
+    getMantraLayoutByFontSize(fontSize);
   const lines = getLinesForRender(mantra);
 
   const renderLine = (lineInfo: RenderLineInfo, lineIndex: number) => {

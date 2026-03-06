@@ -4,6 +4,7 @@ import SettingModal, {
   type SettingMode,
 } from "@/component/settings/setting-modal";
 import ConfirmModal, { type ConfirmMode } from "@/component/ui/confirm-modal";
+import { useSettingStore } from "@/store/setting-store";
 
 type TopSettingButtonProps = {
   mode: SettingMode;
@@ -16,6 +17,7 @@ export default function TopSettingButton({
 }: TopSettingButtonProps) {
   const [isSettingOpen, setIsSettingOpen] = useState(false);
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
+  const { increaseFontSize, decreaseFontSize } = useSettingStore();
   const confirmMode: ConfirmMode =
     mode === "practice" ? "reset-practice" : "reset-memorize";
 
@@ -34,19 +36,17 @@ export default function TopSettingButton({
     <div className="flex w-[200px] items-center justify-end gap-3">
       <button
         type="button"
-        onClick={handleClickReset}
+        onClick={increaseFontSize}
         className="flex h-[35px] w-[35px] items-center justify-center rounded cursor-pointer hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
         aria-label="글자_크기_확대"
-        disabled={!onReset}
       >
         <Image src="/icons/zoom_in.svg" alt="글자_크기_확대" width={30} height={30} />
       </button>
       <button
         type="button"
-        onClick={handleClickReset}
+        onClick={decreaseFontSize}
         className="flex h-[35px] w-[35px] items-center justify-center rounded cursor-pointer hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
         aria-label="글자_크기_축소"
-        disabled={!onReset}
       >
         <Image src="/icons/zoom_out.svg" alt="글자_크기_축소" width={30} height={30} />
       </button>

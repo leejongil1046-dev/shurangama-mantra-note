@@ -14,7 +14,7 @@ import { useSettingStore } from "@/store/setting-store";
 type BlankByPage = Record<number, Set<number>>;
 
 export default function PracticePage() {
-  const { practice, hasHydrated } = useSettingStore();
+  const { practice, hasHydrated, fontSize } = useSettingStore();
   const { pageStart, pageEnd, difficulty } = practice;
   const ratio = difficultyToRatio[difficulty];
 
@@ -100,9 +100,13 @@ export default function PracticePage() {
                 <MantraTextView
                   mantra={currentPage.mantra}
                   blankIndices={currentBlankIndices}
+                  fontSize={fontSize}
                 />
               ) : (
-                <MantraTextView mantra={currentPage.mantra} />
+                <MantraTextView
+                  mantra={currentPage.mantra}
+                  fontSize={fontSize}
+                />
               )}
             </div>
           ) : (

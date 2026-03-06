@@ -16,7 +16,7 @@ import ConfirmModal from "@/component/ui/confirm-modal";
 import GradeResultModal from "@/component/memorize/grade-result-modal";
 
 export default function MemorizePage() {
-  const { memorize, hasHydrated } = useSettingStore();
+  const { memorize, hasHydrated, fontSize } = useSettingStore();
   const { pageStart, pageEnd, difficulty } = memorize;
   const ratio = difficultyToRatio[difficulty];
 
@@ -170,9 +170,13 @@ export default function MemorizePage() {
                   answers={currentAnswers}
                   onChangeAnswer={gradeResult ? undefined : handleChangeAnswer}
                   gradeDisplay={gradeDisplay}
+                  fontSize={fontSize}
                 />
               ) : (
-                <MantraTextView mantra={currentPage.mantra} />
+                <MantraTextView
+                  mantra={currentPage.mantra}
+                  fontSize={fontSize}
+                />
               )}
             </div>
           ) : (
