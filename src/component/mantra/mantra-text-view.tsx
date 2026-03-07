@@ -26,7 +26,7 @@ export function getMantraLayoutByFontSize(fontSize: number = DEFAULT_FONT_SIZE) 
     fontSize,
     charBoxWidth: 24 * ratio,
     charBoxHeight: 26 * ratio,
-    marginBottom: 10 * ratio,
+    marginBottom: 12 * ratio,
   };
 }
 
@@ -70,7 +70,16 @@ export default function MantraTextView({
                 color: graded.isCorrect ? "#2563eb" : "#dc2626",
               }}
             >
-              {graded.correctChar}
+              {/* {graded.correctChar} */}
+              <span
+                className="block leading-none relative"
+                style={{
+                  fontSize,
+                  top: "-1px",
+                }}
+              >
+                {graded.correctChar}
+              </span>
             </div>
           );
         }
@@ -84,7 +93,7 @@ export default function MantraTextView({
               value={value}
               maxLength={1}
               onChange={(e) => onChangeAnswer(globalIndex, e.target.value)}
-              className="flex items-center justify-center text-center font-mantra font-semibold focus:outline-gray-500"
+              className="text-center font-mantra pb-1 font-semibold focus:outline-gray-500"
               style={{
                 width: charBoxWidth,
                 height: charBoxHeight,
@@ -101,7 +110,7 @@ export default function MantraTextView({
         return (
           <div
             key={globalIndex}
-            className="flex items-center justify-center"
+            className="flex items-center justify-center text-center"
             style={{
               width: charBoxWidth,
               height: charBoxHeight,
@@ -112,8 +121,8 @@ export default function MantraTextView({
             }}
           >
             <span
-              className="font-mantra text-[#f8f8f8] hover:text-gray-400 hover:cursor-none"
-              style={{ fontSize }}
+              className="block leading-none relative font-mantra text-[#f8f8f8] hover:text-gray-400 hover:cursor-none"
+              style={{ fontSize, top: "-1px" }}
             >
               {char}
             </span>
@@ -130,7 +139,7 @@ export default function MantraTextView({
             height: charBoxHeight,
           }}
         >
-          <span style={{ fontSize }}>{char}</span>
+          <span className="block leading-none relative" style={{ fontSize , top: "-1px" }}>{char}</span>
         </div>
       );
     });
