@@ -1,9 +1,9 @@
 import type { Difficulty } from "@/store/setting-store";
 
 const difficultyLabel: Record<Difficulty, string> = {
-  easy: "하",
-  medium: "중",
-  hard: "상",
+  easy: "쉬움",
+  medium: "보통",
+  hard: "어려움",
 };
 
 type PageRangeLegendProps = {

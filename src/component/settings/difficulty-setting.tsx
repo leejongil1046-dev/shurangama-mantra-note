@@ -1,9 +1,9 @@
 type Difficulty = "easy" | "medium" | "hard";
 
 const DIFFICULTY_OPTIONS: { value: Difficulty; label: string }[] = [
-  { value: "easy", label: "하" },
-  { value: "medium", label: "중" },
-  { value: "hard", label: "상" },
+  { value: "easy", label: "쉬움" },
+  { value: "medium", label: "보통" },
+  { value: "hard", label: "어려움" },
 ];
 
 type DifficultySettingProps = {
@@ -24,19 +24,20 @@ export default function DifficultySetting({
         </p>
       </div>
 
-      <div className="flex items-center gap-3">
-        {DIFFICULTY_OPTIONS.map((opt) => {
+      <div className="inline-flex overflow-hidden rounded-md border border-gray-300 bg-white">
+        {DIFFICULTY_OPTIONS.map((opt, index) => {
           const isActive = value === opt.value;
+
           return (
             <button
               key={opt.value}
               type="button"
               onClick={() => onChange(opt.value)}
-              className={`flex h-10 w-16 items-center justify-center rounded-md border text-md transition-colors cursor-pointer ${
+              className={`flex h-11 min-w-[92px] items-center justify-center px-6 text-md transition-colors cursor-pointer ${
                 isActive
-                  ? "border-gray-900 bg-gray-900 text-white"
-                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
-              }`}
+                  ? "bg-gray-900 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              } ${index !== 0 ? "border-l border-gray-300" : ""}`}
             >
               {opt.label}
             </button>
