@@ -1,5 +1,6 @@
 "use client";
 
+import ModalActionButton from "@/component/ui/modal-action-button";
 import { accuracy } from "@/lib/grade-memorize";
 import type { GradeResult } from "@/lib/grade-memorize";
 import type { Difficulty } from "@/store/setting-store";
@@ -95,13 +96,11 @@ export default function GradeResultModal({
         </div>
 
         <div className="flex justify-end">
-          <button
-            type="button"
+          <ModalActionButton
+            label="닫기"
+            variant="primary"
             onClick={onClose}
-            className="rounded bg-gray-900 px-4 py-2 text-sm text-white cursor-pointer hover:bg-gray-800"
-          >
-            닫기
-          </button>
+          />
         </div>
       </div>
     </div>

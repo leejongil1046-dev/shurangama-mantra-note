@@ -1,5 +1,7 @@
 "use client";
 
+import ModalActionButton from "@/component/ui/modal-action-button";
+
 export type ConfirmMode =
   | "reset-practice"
   | "reset-memorize"
@@ -69,26 +71,25 @@ export default function ConfirmModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-full max-w-md rounded-md bg-white p-6 shadow-lg">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">{title}</h2>
-        <div className="mb-6 text-md leading-relaxed text-gray-600">
+      <div className="w-full max-w-md rounded-md bg-white p-4 shadow-lg">
+        <h2 className="text-xl font-semibold text-gray-900 p-2">{title}</h2>
+        <div className="text-sm leading-relaxed text-gray-600 p-2">
           {description}
         </div>
-        <div className="flex justify-end gap-3 text-sm">
-          <button
-            type="button"
+
+        <div className="flex justify-end gap-3 p-2">
+          <ModalActionButton
+            label={cancelLabel}
+            variant="cancel"
             onClick={onClose}
-            className="rounded border px-4 py-2 text-gray-600 cursor-pointer hover:bg-gray-100"
-          >
-            {cancelLabel}
-          </button>
-          <button
-            type="button"
-            onClick={handleConfirm}
-            className="rounded bg-gray-900 px-4 py-2 text-white cursor-pointer hover:bg-gray-800"
-          >
-            {confirmLabel}
-          </button>
+            fontSize={12}
+          />
+          <ModalActionButton
+            label={confirmLabel}
+            variant="primary"
+            onClick={handleConfirm}            
+            fontSize={12}
+          />
         </div>
       </div>
     </div>

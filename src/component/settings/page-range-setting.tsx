@@ -15,16 +15,16 @@ export default function PageRangeSetting({
   const [pageStart, pageEnd] = value;
 
   return (
-    <section className="flex items-start justify-between gap-40">
+    <section className="flex items-start justify-between gap-20">
       <div className="min-w-[140px] space-y-1 pt-1">
-        <h2 className="text-2xl font-medium text-gray-800">페이지 선택</h2>
-        <p className="text-md text-gray-500">
+        <h2 className="text-lg font-medium text-gray-800">페이지 선택</h2>
+        <p className="text-sm text-gray-500">
           1~{totalPages}페이지 중 연속된 구간을 선택합니다.
         </p>
       </div>
 
       <div className="flex flex-1 flex-col gap-3">
-        <div className="flex items-center justify-between pt-1 text-md text-gray-500">
+        <div className="flex items-center justify-between pt-1 text-sm text-gray-500">
           <span>
             선택 범위: {pageStart}페이지 ~ {pageEnd}페이지
           </span>

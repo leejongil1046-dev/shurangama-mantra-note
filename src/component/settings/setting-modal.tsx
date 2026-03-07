@@ -2,6 +2,7 @@
 
 import PageRangeSetting from "@/component/settings/page-range-setting";
 import DifficultySetting from "@/component/settings/difficulty-setting";
+import ModalActionButton from "@/component/ui/modal-action-button";
 import { useSettingStore, type Difficulty } from "@/store/setting-store";
 import { useMemorizeStore } from "@/store/memorize-store";
 import { useMemo, useState } from "react";
@@ -62,14 +63,14 @@ export default function SettingModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="mx-4 w-full max-w-[1000px] rounded-md bg-white px-6 py-8 shadow-lg">
-        <div className="mb-6 flex items-center justify-between p-5">
-          <h1 className="text-3xl font-semibold">
+      <div className="w-full max-w-[800px] rounded-md bg-white p-4 shadow-lg">
+        <div className="flex items-center justify-between p-6">
+          <h1 className="text-xl font-semibold">
             설정 {mode === "practice" ? "(연습하기)" : "(암기하기)"}
           </h1>
         </div>
 
-        <div className="space-y-10 p-5">
+        <div className="space-y-6 p-6">
           <PageRangeSetting
             totalPages={12}
             value={tempRange}
@@ -82,28 +83,20 @@ export default function SettingModal({
           />
         </div>
 
-        <div className="mt-8 flex justify-end gap-3 p-4">
+        <div className="mt-0 flex justify-end gap-3 p-6">
           {onClose && (
-            <button
-              type="button"
+            <ModalActionButton
+              label="취소"
+              variant="cancel"
               onClick={onClose}
-              className="rounded-md border border-gray-300 px-6 py-3 text-sm text-gray-700 cursor-pointer hover:bg-gray-50"
-            >
-              취소
-            </button>
+            />
           )}
-          <button
-            type="button"
-            disabled={!isChanged}
+
+          <ModalActionButton
+            label="저장"
+            variant={isChanged ? "primary" : "primaryDisabled"}
             onClick={handleSave}
-            className={`rounded-md px-6 py-3 text-sm text-white transition-colors cursor-pointer ${
-              isChanged
-                ? "cursor-pointer bg-gray-900 hover:bg-gray-800"
-                : "cursor-not-allowed bg-gray-400"
-            }`}
-          >
-            저장
-          </button>
+          />
         </div>
       </div>
     </div>

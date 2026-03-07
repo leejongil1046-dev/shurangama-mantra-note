@@ -16,10 +16,10 @@ export default function DifficultySetting({
   onChange,
 }: DifficultySettingProps) {
   return (
-    <section className="flex items-center justify-between gap-8">
+    <section className="flex items-center justify-between gap-5">
       <div className="min-w-[140px] space-y-1">
-        <h2 className="text-2xl font-medium text-gray-800">난이도</h2>
-        <p className="text-md text-gray-500">
+        <h2 className="text-lg font-medium text-gray-800">난이도</h2>
+        <p className="text-sm text-gray-500">
           빈칸 개수(비율)에 따른 난이도를 선택합니다.
         </p>
       </div>
@@ -33,7 +33,7 @@ export default function DifficultySetting({
               key={opt.value}
               type="button"
               onClick={() => onChange(opt.value)}
-              className={`flex h-11 min-w-[92px] items-center justify-center px-6 text-md transition-colors cursor-pointer ${
+              className={`flex min-w-[92px] items-center justify-center px-5 py-2.5 text-sm transition-colors cursor-pointer ${
                 isActive
                   ? "bg-gray-900 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
