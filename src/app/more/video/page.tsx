@@ -1,12 +1,12 @@
 "use client";
 
-import YoutubeVideoCard from "@/component/more/youtube-video-card";
+// import YoutubeVideoCard from "@/component/more/youtube-video-card";
 
 export default function MoreVideoPage() {
   return (
     <div className="mx-auto h-full w-[800px]">
       <section className="flex h-full w-full min-w-0 flex-col overflow-hidden">
-        <YoutubeVideoCard
+        {/* <YoutubeVideoCard
           title="능엄주 (대불정능엄신주)"
           videoId="_Y8S2dBOM04"
           href="https://www.youtube.com/watch?v=_Y8S2dBOM04"
@@ -24,7 +24,7 @@ export default function MoreVideoPage() {
           href="https://www.youtube.com/watch?v=idpmk6-gQv4"
           sourceLabel="출처: YouTube 백련불교문화재단_성철사상연구원"
           isLast={true}
-        />
+        /> */}
       </section>
     </div>
   );
