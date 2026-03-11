@@ -61,8 +61,16 @@ export default function MemorizePage() {
     setAnswer(currentPageIndex, index, value);
   };
 
-  const currentBlankIndicesArray = blankByPage[currentPageIndex] ?? [];
+  const currentBlankIndicesArray = useMemo(
+    () => blankByPage[currentPageIndex] ?? [],
+    [blankByPage, currentPageIndex],
+  );
   const currentBlankIndices = new Set<number>(currentBlankIndicesArray);
+
+  const sortedBlankIndices = useMemo(
+    () => [...currentBlankIndicesArray].sort((a, b) => a - b),
+    [currentBlankIndicesArray],
+  );
 
   const handleStartMemorize = () => {
     const nextBlankByPage: Record<number, number[]> = {};
@@ -110,6 +118,9 @@ export default function MemorizePage() {
   }, [currentPageIndex, isActive, setLastPageIndex]);
 
   if (!currentPage) return null;
+
+  console.log("currentBlankIndicesArray = ", currentBlankIndicesArray);
+  console.log("sortedBlankIndices = ", sortedBlankIndices);
 
   return (
     <div className="mx-auto h-full w-[1200px]">
@@ -171,6 +182,7 @@ export default function MemorizePage() {
                   onChangeAnswer={gradeResult ? undefined : handleChangeAnswer}
                   gradeDisplay={gradeDisplay}
                   fontSize={fontSize}
+                  blankOrder={sortedBlankIndices}
                 />
               ) : (
                 <MantraTextView

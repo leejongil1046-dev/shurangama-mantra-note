@@ -1,3 +1,7 @@
+"use client";
+
+import type React from "react";
+import { useRef } from "react";
 import { getIndentPx, getLinesForRender } from "@/lib/mantra-format";
 import type { Mantra, RenderLineInfo } from "@/types/mantra";
 
@@ -14,6 +18,7 @@ export type MantraTextViewProps = {
   onChangeAnswer?: (index: number, value: string) => void;
   gradeDisplay?: Record<number, GradeDisplayEntry>;
   fontSize?: number;
+  blankOrder?: number[];
 };
 
 const DEFAULT_FONT_SIZE = 20;
@@ -38,10 +43,91 @@ export default function MantraTextView({
   onChangeAnswer,
   gradeDisplay,
   fontSize = DEFAULT_FONT_SIZE,
+  blankOrder,
 }: MantraTextViewProps) {
   const { charBoxWidth, charBoxHeight, marginBottom } =
     getMantraLayoutByFontSize(fontSize);
+
   const lines = getLinesForRender(mantra);
+  const isComposingRef = useRef(false);
+
+  const focusInputAtEnd = (input: HTMLInputElement) => {
+    input.focus();
+  
+    const length = input.value.length;
+    input.setSelectionRange(length, length);
+  };
+  
+  const moveToNextBlank = (
+    currentElement: HTMLInputElement,
+    globalIndex: number,
+  ) => {
+    if (!blankOrder) return;
+  
+    const currentPos = blankOrder.indexOf(globalIndex);
+    if (currentPos === -1 || currentPos >= blankOrder.length - 1) return;
+  
+    const nextGlobalIndex = blankOrder[currentPos + 1];
+    const container = currentElement.closest("[data-mantra-container]");
+    if (!container) return;
+  
+    const selector = `input[data-blank-global-index="${nextGlobalIndex}"]`;
+    const nextInput = container.querySelector<HTMLInputElement>(selector);
+  
+    if (!nextInput) return;
+  
+    focusInputAtEnd(nextInput);
+  };
+  
+  const moveToPrevBlank = (
+    currentElement: HTMLInputElement,
+    globalIndex: number,
+  ) => {
+    if (!blankOrder) return;
+  
+    const currentPos = blankOrder.indexOf(globalIndex);
+    if (currentPos <= 0) return;
+  
+    const prevGlobalIndex = blankOrder[currentPos - 1];
+    const container = currentElement.closest("[data-mantra-container]");
+    if (!container) return;
+  
+    const selector = `input[data-blank-global-index="${prevGlobalIndex}"]`;
+    const prevInput = container.querySelector<HTMLInputElement>(selector);
+  
+    if (!prevInput) return;
+  
+    focusInputAtEnd(prevInput);
+  };
+  
+  const handleBlankInputKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    globalIndex: number,
+  ) => {
+    if (!blankOrder || !onChangeAnswer) return;
+
+    if (isComposingRef.current || e.nativeEvent.isComposing) return;
+
+    const currentInput = e.currentTarget;
+    const currentValue = currentInput.value;
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      requestAnimationFrame(() => {
+        moveToNextBlank(currentInput, globalIndex);
+      });
+      return;
+    }
+
+    if (e.key === "Backspace" && currentValue === "") {
+      e.preventDefault();
+
+      requestAnimationFrame(() => {
+        moveToPrevBlank(currentInput, globalIndex);
+      });
+    }
+  };
 
   const renderLine = (lineInfo: RenderLineInfo, lineIndex: number) => {
     const { line, indent, startIndex } = lineInfo;
@@ -55,6 +141,7 @@ export default function MantraTextView({
       if (blankIndices.has(globalIndex)) {
         if (gradeDisplay?.[globalIndex]) {
           const graded = gradeDisplay[globalIndex];
+
           return (
             <div
               key={globalIndex}
@@ -70,9 +157,8 @@ export default function MantraTextView({
                 color: graded.isCorrect ? "#2563eb" : "#dc2626",
               }}
             >
-              {/* {graded.correctChar} */}
               <span
-                className="block leading-none relative"
+                className="relative block leading-none"
                 style={{
                   fontSize,
                   top: "-1px",
@@ -90,10 +176,18 @@ export default function MantraTextView({
           return (
             <input
               key={globalIndex}
+              data-blank-global-index={globalIndex}
               value={value}
               maxLength={1}
               onChange={(e) => onChangeAnswer(globalIndex, e.target.value)}
-              className="text-center font-mantra pb-1 font-semibold focus:outline-gray-500"
+              onKeyDown={(e) => handleBlankInputKeyDown(e, globalIndex)}
+              onCompositionStart={() => {
+                isComposingRef.current = true;
+              }}
+              onCompositionEnd={() => {
+                isComposingRef.current = false;
+              }}
+              className="pb-1 text-center font-mantra font-semibold focus:outline-gray-500"
               style={{
                 width: charBoxWidth,
                 height: charBoxHeight,
@@ -121,7 +215,7 @@ export default function MantraTextView({
             }}
           >
             <span
-              className="block leading-none relative font-mantra text-[#f8f8f8] hover:text-gray-400 hover:cursor-none"
+              className="relative block leading-none font-mantra text-[#f8f8f8] hover:cursor-none hover:text-gray-400"
               style={{ fontSize, top: "-1px" }}
             >
               {char}
@@ -139,7 +233,12 @@ export default function MantraTextView({
             height: charBoxHeight,
           }}
         >
-          <span className="block leading-none relative" style={{ fontSize , top: "-1px" }}>{char}</span>
+          <span
+            className="relative block leading-none"
+            style={{ fontSize, top: "-1px" }}
+          >
+            {char}
+          </span>
         </div>
       );
     });
@@ -156,7 +255,7 @@ export default function MantraTextView({
   };
 
   return (
-    <div className="font-mantra leading-relaxed">
+    <div className="font-mantra leading-relaxed" data-mantra-container>
       {lines.map((lineInfo, lineIndex) => renderLine(lineInfo, lineIndex))}
     </div>
   );
