@@ -22,36 +22,6 @@ export default function MoreLayout({ children }: MoreLayoutProps) {
           >
             능엄주 독송 영상
           </Link>
-          <Link
-            href="/more/video"
-            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
-          >
-            회원 정보
-          </Link>
-          <Link
-            href="/more/video"
-            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
-          >
-            기록보기
-          </Link>
-          <Link
-            href="/more/video"
-            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-5 hover:text-gray-600"
-          >
-            개인정보처리방침
-          </Link>
-          <Link
-            href="/more/video"
-            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-5 hover:text-gray-600"
-          >
-            이용약관
-          </Link>
-          <Link
-            href="/more/video"
-            className="block rounded py-6 text-gray-400 border-b border-gray-200 hover:bg-gray-50 hover:text-gray-600"
-          >
-            후원하기
-          </Link>
         </nav>
       </aside>
 
