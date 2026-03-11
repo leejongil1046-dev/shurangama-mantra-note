@@ -10,7 +10,7 @@ export const SHURANGAMA_MANTRA_PAGE_1: Mantra = [
   { line: "나모 로케아르한타남", indent: 0 },
   { line: "나모 스로타판나남", indent: 0 },
   { line: "나모 스크르타가미남", indent: 0 },
-  { line: "니모 아나가미남", indent: 0 },
+  { line: "나모 아나가미남", indent: 0 },
   { line: "나모 로케사먁가타남 사먘프라티판나남", indent: 0 },
   { line: "나모 라트나트라야야", indent: 0 },
   {
