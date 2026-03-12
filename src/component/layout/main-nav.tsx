@@ -44,7 +44,7 @@ export default function MainNav() {
     <nav className="flex h-16 w-full items-center border-b border-gray-200">
       <div
         ref={containerRef}
-        className="relative mx-auto flex h-full w-[900px] items-center justify-between gap-20 text-2xl"
+        className="relative mx-auto flex h-full w-[950px] items-center justify-between gap-20 text-2xl"
       >
         {NAV_ITEMS.map((item, index) => {
           const isActive = item.key === activeKey;
