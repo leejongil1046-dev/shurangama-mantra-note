@@ -20,6 +20,9 @@ export type MantraTextViewProps = {
   gradeDisplay?: Record<number, GradeDisplayEntry>;
   fontSize?: number;
   blankOrder?: number[];
+  containerRef?: React.RefObject<HTMLDivElement | null>;
+  onEnterAtLastBlank?: () => void;
+  onBackspaceAtFirstBlank?: () => void;
 };
 
 const DEFAULT_FONT_SIZE = 20;
@@ -45,6 +48,9 @@ export default function MantraTextView({
   gradeDisplay,
   fontSize = DEFAULT_FONT_SIZE,
   blankOrder,
+  containerRef,
+  onEnterAtLastBlank,
+  onBackspaceAtFirstBlank,
 }: MantraTextViewProps) {
   const { charBoxWidth, charBoxHeight, marginBottom } =
     getMantraLayoutByFontSize(fontSize);
@@ -55,7 +61,10 @@ export default function MantraTextView({
     handleBlankInputKeyDown,
     onCompositionStart,
     onCompositionEnd,
-  } = useBlankInputKeys(blankOrder);
+  } = useBlankInputKeys({blankOrder,
+    onEnterAtLastBlank,
+    onBackspaceAtFirstBlank,
+  });
 
   const renderLine = (lineInfo: RenderLineInfo, lineIndex: number) => {
     const { line, indent, startIndex } = lineInfo;
@@ -179,7 +188,7 @@ export default function MantraTextView({
   };
 
   return (
-    <div className="font-mantra leading-relaxed" data-mantra-container>
+    <div ref={containerRef} className="font-mantra leading-relaxed" data-mantra-container>
       {lines.map((lineInfo, lineIndex) => renderLine(lineInfo, lineIndex))}
     </div>
   );

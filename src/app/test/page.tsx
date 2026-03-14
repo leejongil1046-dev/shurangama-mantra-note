@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import MantraTextView from "@/component/mantra/mantra-text-view";
 import { SHURANGAMA_MANTRA_PAGES } from "@/data/shurangama-mantra";
 import { createBlankIndices, difficultyToRatio } from "@/lib/mantra-blank";
@@ -89,6 +89,33 @@ export default function TestPage() {
   const handleResetTest = () => {
     resetSession();
     setCurrentIndex(0);
+  };
+
+  const mantraContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleEnterAtLastBlank = () => {
+    if (isLast) return;
+    goNext();
+    setTimeout(() => {
+      mantraContainerRef.current
+        ?.querySelector<HTMLInputElement>("input[data-blank-global-index]")
+        ?.focus();
+    }, 0);
+  };
+
+  const handleBackspaceAtFirstBlank = () => {
+    if (isFirst) return;
+    goPrev();
+    setTimeout(() => {
+      const inputs = mantraContainerRef.current?.querySelectorAll<HTMLInputElement>(
+        "input[data-blank-global-index]",
+      );
+      const lastInput = inputs?.item(inputs.length - 1);
+      if (lastInput) {
+        lastInput.focus();
+        lastInput.setSelectionRange(lastInput.value.length, lastInput.value.length);
+      }
+    }, 0);
   };
 
   const {
@@ -180,6 +207,9 @@ export default function TestPage() {
                   gradeDisplay={gradeDisplay}
                   fontSize={fontSize}
                   blankOrder={sortedBlankIndices}
+                  containerRef={mantraContainerRef}
+                  onEnterAtLastBlank={handleEnterAtLastBlank}
+                  onBackspaceAtFirstBlank={handleBackspaceAtFirstBlank}
                 />
               ) : (
                 <MantraTextView
