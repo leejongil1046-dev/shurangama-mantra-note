@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-import { useRef } from "react";
 import { getIndentPx, getLinesForRender } from "@/lib/mantra-format";
 import type { Mantra, RenderLineInfo } from "@/types/mantra";
 import { useBlankInputKeys } from "@/hooks/use-blank-input-keys";
