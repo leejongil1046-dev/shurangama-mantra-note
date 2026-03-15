@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { computeGradeResult } from "@/lib/grade-test";
 import type { GradeResult } from "@/lib/grade-test";
-import { getFullText } from "@/lib/mantra-format";
 import type { BlankByPageState } from "@/store/test-store";
 import type { MantraPageItem } from "@/types/mantra";
 
@@ -16,7 +15,6 @@ type UseTestGradingParams = {
   gradeResult: GradeResult | null;
   setGradeResult: (result: GradeResult | null) => void;
   currentPageIndex: number;
-  currentPage: MantraPageItem | undefined;
 };
 
 export function useTestGrading({
@@ -26,7 +24,6 @@ export function useTestGrading({
   gradeResult,
   setGradeResult,
   currentPageIndex,
-  currentPage,
 }: UseTestGradingParams) {
   const [isGradeConfirmOpen, setIsGradeConfirmOpen] = useState(false);
   const [isResultModalOpen, setIsResultModalOpen] = useState(false);

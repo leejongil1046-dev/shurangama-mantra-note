@@ -136,7 +136,6 @@ export default function TestPage() {
     gradeResult,
     setGradeResult,
     currentPageIndex,
-    currentPage: currentPage ?? undefined,
   });
 
   useEffect(() => {
@@ -156,6 +155,7 @@ export default function TestPage() {
             isActive={isActive}
             isGraded={!!gradeResult}
             showWrongInputs={showWrongInputs}
+            hasWrongInputs={gradeResult?.hasWrongInputs ?? false}
             onStart={handleStartTest}
             onGrade={handleGradeClick}
             onShowWrongInputs={handleShowWrongInputs}

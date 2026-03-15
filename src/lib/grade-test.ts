@@ -13,6 +13,7 @@ export type GradeResult = {
   >;
   total: { totalChars: number; blanks: number; correct: number; wrong: number };
   correctByBlank: Record<number, Record<number, BlankGrade>>;
+  hasWrongInputs: boolean;
 };
 
 type AnswersByPage = Record<number, Record<number, string>>;
@@ -29,6 +30,7 @@ export function computeGradeResult(
   let totalBlanks = 0;
   let totalCorrect = 0;
   let totalWrong = 0;
+  let hasWrongInputs = false;
 
   for (const pageIndex of Object.keys(blankByPage).map(Number)) {
     const indices = blankByPage[pageIndex] ?? [];
@@ -52,7 +54,10 @@ export function computeGradeResult(
         ? { correct: true, char: correctChar }
         : { correct: false, correctChar, wrongChar: userAnswer };
       if (isCorrect) correct++;
-      else wrong++;
+      else {
+        wrong++;
+        if (userAnswer !== "") hasWrongInputs = true;
+      }
     }
 
     perPage[pageIndex] = {
@@ -77,6 +82,7 @@ export function computeGradeResult(
       wrong: totalWrong,
     },
     correctByBlank,
+    hasWrongInputs,
   };
 }
 

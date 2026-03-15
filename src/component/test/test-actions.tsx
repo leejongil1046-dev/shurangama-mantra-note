@@ -6,6 +6,7 @@ type TestActionsProps = {
   isActive: boolean;
   isGraded?: boolean;
   showWrongInputs?: boolean;
+  hasWrongInputs?: boolean;
   onStart: () => void;
   onGrade?: () => void;
   onShowWrongInputs?: () => void;
@@ -16,6 +17,7 @@ export default function TestActions({
   isActive,
   isGraded = false,
   showWrongInputs = false,
+  hasWrongInputs = true,
   onStart,
   onGrade,
   onShowWrongInputs,
@@ -47,10 +49,12 @@ export default function TestActions({
         <button
           type="button"
           onClick={onShowWrongInputs}
-          className={buttonClass}
+          disabled={!hasWrongInputs}
+          className={`${buttonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           {showWrongInputs ? "정답확인" : "오답확인"}
-        </button>)}
+        </button>
+      )}
     </div>
   );
 }
